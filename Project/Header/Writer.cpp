@@ -57,7 +57,7 @@ void Writer::BeginWrite(string Text,int Tempo){
      StrConverter Convertitore; //Converte un carattere in un vettore di stringhe (01...)
      vector< bitset<DimChr> > Carattere(NumRig); //Matrice alla i esima riga contiene il valore delle colonne per quel carattere
      vector<string> RisultatoConversione(NumRig); //Stringhe risultanti dal testo inserito
-     for(int i=0;i<Text.length();i++){ //Passo ogni carattere del testo inserito in input
+     for(int i=0;i<(int)Text.length();i++){ //Passo ogni carattere del testo inserito in input
         Convertitore.ChrToVet(Text[i],RisultatoConversione.begin()); //Salvo in RisultatoConversione le varie stringhe che corrispondono a Text[i]
         AppendSchermo(RisultatoConversione.begin()); // Aggiungo in fondo allo schermo il nuovo carattere
         for(int k=0;k<=DimChr;k++){ //Eseguo DimChr+1 shift in modo da far comparire il carattere

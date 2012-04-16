@@ -1,6 +1,7 @@
 Writer.h (c++)
 ==========
 
+Il progetto è stato compilato tramite VC++ 2010.
 Classe creata appositamente per scrivere su una matrice di led collegata ad una scheda Arduino.
 Il progetto &egrave; composto da 3 principali classi:
 SerialClass.h -> &egrave; la classe più bassa crea una connessione con la board Arduino.

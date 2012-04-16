@@ -1,8 +1,8 @@
 #ifndef WRITERCLASS_H_INCLUDED
 #define WRITERCLASS_H_INCLUDED
 
-#include "serial/Serial.cpp"
-#include "strconverter/StrConverter.cpp"
+#include "serial\SerialClass.h"
+#include "strconverter\StrConverterClass.h"
 #include <bitset>
 #include <vector>
 #include <windows.h>
