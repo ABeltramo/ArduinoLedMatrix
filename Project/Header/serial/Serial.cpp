@@ -1,4 +1,5 @@
 #include "SerialClass.h"
+#include <stdexcept>
 
 Serial::Serial(char *portName)
 {
@@ -21,12 +22,12 @@ Serial::Serial(char *portName)
         if(GetLastError()==ERROR_FILE_NOT_FOUND){
 
             //Print Error if neccessary
-            printf("ERROR: Handle was not attached. Reason: %s not available.\n", portName);
+			throw std::runtime_error("Sembra che non sia collegato nulla sulla porta scelta."); 
 
         }
         else
         {
-            printf("ERROR!!!");
+            throw std::runtime_error("Errore durante il collegamento alla porta seriale.");
         }
     }
     else
@@ -38,7 +39,7 @@ Serial::Serial(char *portName)
         if (!GetCommState(this->hSerial, &dcbSerialParams))
         {
             //If impossible, show an error
-            printf("failed to get current serial parameters!");
+			std::runtime_error("Fallimento nel recuperare i parametri seriali.");
         }
         else
         {
@@ -51,7 +52,7 @@ Serial::Serial(char *portName)
              //Set the parameters and check for their proper application
              if(!SetCommState(hSerial, &dcbSerialParams))
              {
-                printf("ALERT: Could not set Serial Port parameters");
+				std::runtime_error("ATTENZIONE: Non è stato possibile settare i parametri della porta seriale.");
              }
              else
              {

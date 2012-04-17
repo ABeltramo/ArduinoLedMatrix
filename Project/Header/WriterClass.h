@@ -5,7 +5,7 @@
 #include "strconverter\StrConverterClass.h"
 #include <bitset>
 #include <vector>
-#include <windows.h>
+#include <fstream>
 
 class Writer{
       private:
@@ -19,10 +19,12 @@ class Writer{
       public:
          //Inizializza il vettore e resetta tutto lo schermo
          Writer(bool InitialState); //Stato iniziale: tutto acceso(true), tutto spento(false)
-         Writer(); //In automatico tutto spento
+         Writer(void); //In automatico tutto spento
+		 ~Writer(); //Distruttore
          void SetSchermo(bool Val); //Setta lo schermo al valore inserito
-         void BeginWrite(string Text,int Tempo); //Inizia a scrivere sullo schermo il testo Text
-         string SchermoToString(void);
+         bool BeginWrite(string Text,int Tempo); //Inizia a scrivere sullo schermo il testo Text
+         string SchermoToString(void); //Restituisce lo schermo sottoforma di stringa
+		 bool LoadTextFromFile(string Path,int Tempo); //Carica il testo dal file presente in Path
 };
 
 #endif
