@@ -22,9 +22,10 @@ class Writer{
          Writer(void); //In automatico tutto spento
 		 ~Writer(); //Distruttore
          void SetSchermo(bool Val); //Setta lo schermo al valore inserito
-         bool BeginWrite(string Text,int Tempo); //Inizia a scrivere sullo schermo il testo Text
+         bool BeginWrite(string Text,int Tempo,Serial &Connection); //Inizia a scrivere sullo schermo il testo Text
          string SchermoToString(void); //Restituisce lo schermo sottoforma di stringa
-		 bool LoadTextFromFile(string Path,int Tempo); //Carica il testo dal file presente in Path
+		 string SchermoToStringHuman(void); //Restituisce lo schermo sottoforma di stringa
+		 bool LoadTextFromFile(string Path,Serial &Connection); //Carica il testo dal file presente in Path: Prima riga tempo poi scritte
 };
 
 #endif

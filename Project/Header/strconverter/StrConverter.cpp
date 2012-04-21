@@ -40,6 +40,7 @@ StrConverter::StrConverter(void){
    Alfabeto['/'] = new bitset<DimCarSchermo> (string("000010001000100010001000000000"));
    Alfabeto['='] = new bitset<DimCarSchermo> (string("000000000001110000000111000000"));
    //Numeri
+   Alfabeto['0'] = new bitset<DimCarSchermo> (string("111111000110001100011000111111"));
    Alfabeto['1'] = new bitset<DimCarSchermo> (string("001000110010100001000010011111"));
    Alfabeto['2'] = new bitset<DimCarSchermo> (string("011101000100010001000100011111"));   
    Alfabeto['3'] = new bitset<DimCarSchermo> (string("011101000100111000011000101110"));

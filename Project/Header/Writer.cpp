@@ -64,9 +64,22 @@ string Writer::SchermoToString(void){
      return Ris; //Restituisco la stringa
 }
 
-bool Writer::BeginWrite(string Text,int Tempo){
+string Writer::SchermoToStringHuman(void){
+     string Ris;
+     for(int i=0;i<NumRig;i++){ //Per ogni riga
+         for(int j=0;j<NumCol;j++) //per ogni colonna tranne quelle aggiuntive
+            if(Schermo[j][i]) //Se il bitset è su true
+               Ris.push_back('1');
+            else
+               Ris.push_back(' ');
+         Ris.push_back('\n'); //Manda a capo dopo ogni riga (SOLO PER VISUALIZZARE!)
+     }
+     return Ris; //Restituisco la stringa
+}
+
+bool Writer::BeginWrite(string Text,int Tempo,Serial &Connection){
 	try{
-		 Serial Connection("COM3");
+		 //Serial Connection("COM3");
 		 StrConverter Convertitore; //Converte un carattere in un vettore di stringhe (01...)
 		 vector< bitset<DimChr> > Carattere(NumRig); //Matrice alla i esima riga contiene il valore delle colonne per quel carattere
 		 vector<string> RisultatoConversione(NumRig); //Stringhe risultanti dal testo inserito
@@ -79,7 +92,9 @@ bool Writer::BeginWrite(string Text,int Tempo){
 			   system("CLS");
 			   cout << SchermoToString() << endl;
 			   */
-			   Connection.Write(SchermoToString());
+			   system("CLS");
+			   cout << SchermoToStringHuman() << " ";
+			   Connection.Write("2"+SchermoToString());
 			   Sleep(Tempo);
 			}
 		 }
@@ -91,18 +106,21 @@ bool Writer::BeginWrite(string Text,int Tempo){
 	}
 }
 
-bool Writer::LoadTextFromFile(string Path,int Tempo){
+bool Writer::LoadTextFromFile(string Path,Serial &Connection){
 	string Linea;
+	string Tempo;
 	ifstream File;
 	File.open(Path); //Apro il file
 	if (!File.is_open()){ //Errore nell'apertura del file
 		throw std::runtime_error("Non è stato possibile aprire il file in input");
 		return false;
 	}
+	getline (File,Tempo); //Leggo la linea e la salvo in Linea
 	while ( File.good() ){
       getline (File,Linea); //Leggo la linea e la salvo in Linea
-	  BeginWrite(Linea,Tempo); //Invio la linea alla scheda Arduino
+	  BeginWrite(Linea+" ",atoi(Tempo.c_str()),Connection); //Invio la linea alla scheda Arduino
     }
     File.close(); //Chiudo il file
+	return true;
 }
 
